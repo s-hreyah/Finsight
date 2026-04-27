@@ -1,0 +1,6 @@
+{
+  "name": "FinSight - Smart Expense Tracker",
+  "description": "A comprehensive financial management tool with AI-powered categorization, linear regression for expense prediction, and spending pattern clustering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
