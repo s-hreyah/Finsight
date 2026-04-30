@@ -2,6 +2,7 @@ import * as ss from 'simple-statistics';
 import { kmeans } from 'ml-kmeans';
 import { Transaction, MonthlyStats, PredictionResult } from '../types';
 import { format, parseISO, startOfMonth } from 'date-fns';
+import linearRegression from '../lib/utils';
 
 export function predictNextMonthExpenses(transactions: Transaction[]): PredictionResult | null {
   const expenses = transactions.filter(t => t.type === 'expense');
@@ -19,10 +20,11 @@ export function predictNextMonthExpenses(transactions: Transaction[]): Predictio
 
   // Convert months to indices (0, 1, 2...) for regression
   const data = sortedMonths.map((month, index) => [index, monthlyTotals[month]]);
-  
-  const line = ss.linearRegression(data);
+
+  const line = linearRegression(data);
   const nextIndex = sortedMonths.length;
   const predictedValue = Math.max(0, ss.linearRegressionLine(line)(nextIndex));
+  console.log("predictedValue: ", predictedValue)
 
   // Calc next month string
   const lastDate = parseISO(sortedMonths[sortedMonths.length - 1] + '-01');
@@ -42,7 +44,7 @@ export function clusterSpendingPatterns(transactions: Transaction[]) {
 
   // Feature engineering: simple [amount] for now
   const data = expenses.map(t => [t.amount]);
-  
+
   const k = Math.min(3, expenses.length);
   const clusters = kmeans(data, k, {});
 
@@ -62,7 +64,7 @@ export function clusterSpendingPatterns(transactions: Transaction[]) {
   });
 
   results.sort((a, b) => a.avgAmount - b.avgAmount);
-  
+
   results[0].label = 'Small Daily Spends';
   if (results[1]) results[1].label = 'Regular Expenses';
   if (results[2]) results[2].label = 'High Impact Spends';
@@ -72,11 +74,11 @@ export function clusterSpendingPatterns(transactions: Transaction[]) {
 
 export function getMonthlyStats(transactions: Transaction[]): MonthlyStats[] {
   const statsMap: { [key: string]: { income: number; expenses: number } } = {};
-  
+
   transactions.forEach(t => {
     const month = format(parseISO(t.date), 'MMM yyyy');
     if (!statsMap[month]) statsMap[month] = { income: 0, expenses: 0 };
-    
+
     if (t.type === 'income') {
       statsMap[month].income += t.amount;
     } else {

@@ -20,8 +20,8 @@ export const TransactionsTable: React.FC<Props> = ({ transactions, onDelete }) =
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter(t => {
-      const matchesSearch = t.description.toLowerCase().includes(search.toLowerCase()) || 
-                             t.category.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch = t.description.toLowerCase().includes(search.toLowerCase()) ||
+        t.category.toLowerCase().includes(search.toLowerCase());
       const matchesType = filterType === 'all' || t.type === filterType;
       const matchesCategory = filterCategory === 'all' || t.category === filterCategory;
       return matchesSearch && matchesType && matchesCategory;
@@ -78,7 +78,7 @@ export const TransactionsTable: React.FC<Props> = ({ transactions, onDelete }) =
           </thead>
           <tbody className="divide-y divide-gray-800">
             {filteredTransactions.map((t) => (
-              <tr key={t.id} className="hover:bg-gray-800/30 transition-colors group text-xs">
+              <tr key={t.id + new Date().getMilliseconds()} className="hover:bg-gray-800/30 transition-colors group text-xs">
                 <td className="px-5 py-3">
                   <div className="flex items-center gap-3">
                     <div className={cn(
@@ -106,7 +106,7 @@ export const TransactionsTable: React.FC<Props> = ({ transactions, onDelete }) =
                   {t.type === 'income' ? '+' : ''}{formatCurrency(t.amount)}
                 </td>
                 <td className="px-5 py-3 text-right">
-                  <button 
+                  <button
                     onClick={() => onDelete(t.id)}
                     className="text-gray-600 hover:text-rose-500 opacity-0 group-hover:opacity-100 transition-all"
                   >
@@ -117,7 +117,7 @@ export const TransactionsTable: React.FC<Props> = ({ transactions, onDelete }) =
             ))}
           </tbody>
         </table>
-        
+
         {filteredTransactions.length === 0 && (
           <div className="py-12 text-center text-gray-600 text-[11px] uppercase tracking-widest italic">
             Ledger Empty / Buffer Null

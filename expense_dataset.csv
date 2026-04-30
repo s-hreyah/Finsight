@@ -1,0 +1,45 @@
+amount,category,date,description,type
+85000,Salary,2026-04-01,Monthly salary credited,income
+85000,Salary,2026-03-01,Salary received from company,income
+20000,Freelance,2026-04-05,Website development payment,income
+
+22000,Housing,2026-04-02,Flat rent payment,expense
+22000,Housing,2026-03-02,Monthly house rent,expense
+
+1200,Transport,2026-04-10,Uber ride to office,expense
+1000,Transport,2026-04-12,Pathao bike ride,expense
+500,Transport,2026-04-15,Bus fare,expense
+1800,Transport,2026-04-18,Petrol for bike,expense
+
+9000,Food,2026-04-05,Bhatbhateni grocery shopping,expense
+500,Food,2026-04-06,Momo at cafe,expense
+800,Food,2026-04-07,Thakali lunch,expense
+1200,Food,2026-04-08,Dinner at restaurant,expense
+
+1800,Utilities,2026-04-10,Electricity bill payment,expense
+1500,Utilities,2026-04-12,Internet bill payment,expense
+500,Utilities,2026-04-15,Ncell recharge,expense
+
+6000,Entertainment,2026-04-14,Movie at QFX cinema,expense
+3000,Entertainment,2026-04-16,Netflix subscription,expense
+
+3000,Shopping,2026-04-20,Bought shoes from Daraz,expense
+4500,Shopping,2026-04-21,Clothes shopping at mall,expense
+
+800,Healthcare,2026-04-25,Doctor clinic visit,expense
+1200,Healthcare,2026-04-26,Pharmacy medicine,expense
+
+1500,Education,2026-04-05,Tuition fee payment,expense
+2000,Education,2026-04-06,Online course subscription,expense
+1200,Education,2026-04-07,Exam preparation books,expense
+1800,Education,2026-04-08,College admission fee,expense
+1000,Education,2026-04-09,Coding bootcamp fee,expense
+
+5000,Machinery,2026-04-10,Laptop purchase for work,expense
+8000,Machinery,2026-04-11,Printer for office use,expense
+12000,Machinery,2026-04-12,Computer hardware upgrade,expense
+6000,Machinery,2026-04-13,Office chair and desk,expense
+10000,Machinery,2026-04-14,Server equipment purchase,expense
+
+500,Other,2026-04-27,Miscellaneous expense,expense
+700,Other,2026-03-30,Unexpected payment,expense

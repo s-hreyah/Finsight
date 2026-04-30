@@ -6,10 +6,13 @@ import { categorizeMultipleTransactions } from '../services/gemini';
 
 interface Props {
   onImport: (transactions: Omit<Transaction, 'id'>[]) => void;
+  setIsProcessing: () => void;
+  uid: string;
 }
 
-export const CSVUpload: React.FC<Props> = ({ onImport }) => {
+export const CSVUpload: React.FC<Props> = ({ onImport, setIsProcessing, uid }) => {
   const handleFileUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsProcessing(true)
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -17,7 +20,7 @@ export const CSVUpload: React.FC<Props> = ({ onImport }) => {
       header: true,
       complete: async (results) => {
         const rawData = results.data as any[];
-        
+
         // Map common CSV headers to our format
         const descriptions = rawData.map(row => row.description || row.Description || row.Name || row.name || '');
         const categories = await categorizeMultipleTransactions(descriptions);
@@ -26,16 +29,17 @@ export const CSVUpload: React.FC<Props> = ({ onImport }) => {
           const amount = parseFloat(row.amount || row.Amount || row.value || row.Value || '0');
           const date = row.date || row.Date || new Date().toISOString();
           const type = ((row.type || row.Type || (amount > 0 ? 'income' : 'expense')).toLowerCase() === 'income' ? 'income' : 'expense') as TransactionType;
-
-          return {
-            description: descriptions[index] || 'CSV Transaction',
+          const output = {
+            description: descriptions[index] || 'Other',
             amount: Math.abs(amount),
             date: new Date(date).toISOString(),
             category: categories[index] || 'Other',
+            userId: uid,
             type
-          };
+          }
+          return output
         }).filter(t => t.description && !isNaN(t.amount));
-
+        console.log("transactions: ", transactions)
         onImport(transactions);
       }
     });
