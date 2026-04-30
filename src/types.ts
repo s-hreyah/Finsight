@@ -1,4 +1,7 @@
 export type TransactionType = 'income' | 'expense';
+export type NotificationType = 'budget_alert' | 'reminder' | 'income_update' | 'system';
+export type NotificationStatus = 'read' | 'unread';
+
 
 export interface Transaction {
   id: string;
@@ -33,3 +36,20 @@ export interface ClusterResult {
   centroid: number[];
   label: string;
 }
+
+export interface Notification {
+  id: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  timestamp: string;
+  status: NotificationStatus;
+  userId: string;
+  metadata?: any;
+}
+export interface Budget {
+  categoryId: string;
+  limit: number;
+  period: 'monthly' | 'weekly';
+}
+

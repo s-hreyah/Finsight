@@ -1,9 +1,16 @@
 import express from "express";
 import cors from "cors";
 import natural from "natural";
+import trainModel from "./train.js";
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.options("*", cors());
 app.use(express.json());
 
 let classifier = null;
@@ -46,6 +53,26 @@ app.post("/categorize-batch", (req, res) => {
   res.json({ categories: results });
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000 🚀");
-}); 
+
+
+app.post("/train", async (req, res) => {
+  try {
+    await trainModel();
+
+    const loaded = await new Promise((resolve, reject) => {
+      natural.BayesClassifier.load("expense-model.json", null, (err, model) => {
+        if (err) reject(err);
+        else resolve(model);
+      });
+    });
+
+    classifier = loaded;
+
+    res.send("trained + reloaded");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("training failed");
+  }
+});
+
+app.listen(5000, () => console.log("Server running on port 5000 🚀"));
