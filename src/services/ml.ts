@@ -34,7 +34,7 @@ export function predictNextMonthExpenses(transactions: Transaction[]): Predictio
   return {
     nextMonth: nextMonthStr,
     predictedExpense: predictedValue,
-    confidence: Math.abs(line.m) < 0.1 ? 0.9 : 0.7 // Simple heuristic for now
+    confidence: Math.abs(line.m) < 0.1 ? 0.9 : 0.7 
   };
 }
 
@@ -42,7 +42,7 @@ export function clusterSpendingPatterns(transactions: Transaction[]) {
   const expenses = transactions.filter(t => t.type === 'expense');
   if (expenses.length < 5) return [];
 
-  // Feature engineering: simple [amount] for now
+  
   const data = expenses.map(t => [t.amount]);
 
   const k = Math.min(3, expenses.length);

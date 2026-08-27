@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Upload, FileText } from 'lucide-react';
 import Papa from 'papaparse';
 import { Transaction, TransactionType } from '../types';
-import { categorizeMultipleTransactions } from '../services/gemini';
+import { categorizeMultipleTransactions } from '../services/categorize';
 
 interface Props {
   onImport: (transactions: Omit<Transaction, 'id'>[]) => void;

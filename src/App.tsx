@@ -200,7 +200,7 @@ export default function App() {
             <aside className="w-64 border-r border-gray-800 flex flex-col bg-[#0F1115]">
                 <div className="p-6">
                     <h1 className="text-white font-bold text-xl">
-                        FINSIGHT<span className="text-emerald-500">.AI</span>
+                        FINSIGHT
                     </h1>
                 </div>
 

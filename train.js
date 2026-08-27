@@ -25,6 +25,7 @@ const trainModel = async () => {
 
     const snapshot = await getDocs(collection(db, "transactions"));
 
+    console.error("Categorization error:", error);
     if (snapshot.empty) {
       console.log("⚠️ No training data found");
       return;

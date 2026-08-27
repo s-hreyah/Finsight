@@ -67,7 +67,7 @@ export const AuthPage: React.FC = () => {
         className="w-full max-w-md bg-[#0F1115] border border-gray-800 rounded-2xl p-8 shadow-2xl"
       >
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white tracking-tight">FINSIGHT<span className="text-emerald-500">.AI</span></h1>
+          <h1 className="text-2xl font-bold text-white tracking-tight">FINSIGHT</h1>
           <p className="text-gray-500 text-xs uppercase tracking-widest mt-1">Predictive Financial Engine</p>
         </div>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, X } from 'lucide-react';
 import { Transaction, TransactionType } from '../types';
-import { categorizeTransaction } from '../services/gemini';
+import { categorizeTransaction } from '../services/categorize';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -91,8 +91,8 @@ export const TransactionForm: React.FC<Props> = ({ onAdd }) => {
                       onClick={() => setFormData({ ...formData, type })}
                       className={cn(
                         "flex-1 py-1.5 text-[10px] font-bold uppercase tracking-widest rounded transition-all",
-                        formData.type === type 
-                          ? "bg-gray-800 text-white shadow-sm" 
+                        formData.type === type
+                          ? "bg-gray-800 text-white shadow-sm"
                           : "text-gray-500 hover:text-gray-400"
                       )}
                     >
